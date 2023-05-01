@@ -1,15 +1,24 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const fullName = params.get("fullName");
-  const response = await fetch("http://localhost:7071/api/search", {
-    method: "POST",
-    headers: [["Content-Type", "application/json"]],
-    body: JSON.stringify({
-      filter: {
-        PlayerName: fullName,
-      },
-    }),
-  });
+  const response = await fetch(
+    `http://localhost:7071/api/search?url=${encodeURIComponent(
+      "DesktopModules/MVC/SearchPlayers/Default/GetInternalPlayers"
+    )}`,
+    {
+      method: "POST",
+      headers: [
+        ["px-Content-Type", "application/json"],
+        ["px-moduleid", 503],
+        ["px-tabid", 150],
+      ],
+      body: JSON.stringify({
+        filter: {
+          PlayerName: fullName,
+        },
+      }),
+    }
+  );
 
   const data = await response.json();
   loadPlayerList(data.Result);
