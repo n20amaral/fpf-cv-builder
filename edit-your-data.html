@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPF CV Builder</title>
+</head>
+<body>
+    <h1>Alguma correção a fazer?</h1>
+    <form method="GET" action="my-footballer-cv.html">
+        <fieldset id="photo-id">
+            <img src="https://fpfimagehandler.fpf.pt/ScoreImageHandler.ashx?type=Person&id=54311&op=t&w=202&h=249" alt="Profile photo of Nuno Miguel Silva Amaral" />
+            <input type="file" name="photoPath" id="photo-path">
+        </fieldset>
+        <fieldset id="personal-data">
+            <label for="full-name">Nome Completo</label>
+            <input id="full-name" name="fullName" type="text" value="Nuno Miguel da Silva Amaral" />
+            <label for="date-of-birth">Data Nascimento</label>
+            <input id="date-of-birth" name="dateOfBirth" type="date" value="1985-02-10" />
+            <label for="country">Naturalidade</label>
+            <input id="country" name="country" type="text" value="Portugal" />
+        </fieldset>
+        <fieldset id="club-history">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Época</th>
+                        <th>Modalidade</th>
+                        <th>Clube</th>
+                        <th>Escalão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input id="star-year" type="number" value="2009">
+                            <input id="end-year" type="text" value="10" disabled>
+                            <input type="hidden" name="history[]season" value="2009-10">
+                        </td>
+                        <td>
+                            <select name="history[]sport">
+                                <option value="footbal">Futebol</option>
+                                <option value="futsal" selected>Futsal</option>
+                                <option value="beach">Futebol de Praia</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="history[]club" value="FC Flamengos" />
+                        </td>
+                        <td>
+                            <select name="history[]category">
+                                <optgroup label="Futebol 5">
+                                    <option value="junior-g">Petizes</option>
+                                </optgroup>
+                                <optgroup label="Futebol 7">    
+                                    <option value="junior-f">Traquinas</option>
+                                    <option value="junior-e">Benjamins</option>
+                                </optgroup>
+                                <optgroup label="Futebol 9">    
+                                    <option value="junior-d">Infantis</option>
+                                </optgroup>
+                                <optgroup label="Futebol 11">
+                                    <option value="junior-c">Iniciados</option>
+                                    <option value="junior-b">Juvenis</option>
+                                    <option value="junior-a">Juniore</option>
+                                    <option value="senior" selected >Séniores</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="star-year" type="number" value="2008">
+                            <input id="end-year" type="text" value="09" disabled>
+                            <input type="hidden" name="history[]season" value="2008-09">
+                        </td>
+                        <td>
+                            <select name="history[]sport">
+                                <option value="footbal">Futebol</option>
+                                <option value="futsal" selected>Futsal</option>
+                                <option value="beach">Futebol de Praia</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="history[]club" value="FC Flamengos" />
+                        </td>
+                        <td>
+                            <select name="history[]category">
+                                <optgroup label="Futebol 5">
+                                    <option value="junior-g">Petizes</option>
+                                </optgroup>
+                                <optgroup label="Futebol 7">    
+                                    <option value="junior-f">Traquinas</option>
+                                    <option value="junior-e">Benjamins</option>
+                                </optgroup>
+                                <optgroup label="Futebol 9">    
+                                    <option value="junior-d">Infantis</option>
+                                </optgroup>
+                                <optgroup label="Futebol 11">
+                                    <option value="junior-c">Iniciados</option>
+                                    <option value="junior-b">Juvenis</option>
+                                    <option value="junior-a">Juniore</option>
+                                    <option value="senior" selected >Séniores</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="star-year" type="number" value="2001">
+                            <input id="end-year" type="text" value="02" disabled>
+                            <input type="hidden" name="history[]season" value="2001-02">
+                        </td>
+                        <td>
+                            <select name="history[]sport">
+                                <option value="footbal" selected>Futebol</option>
+                                <option value="futsal">Futsal</option>
+                                <option value="beach">Futebol de Praia</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="history[]club" value="FC Flamengos" />
+                        </td>
+                        <td>
+                            <select name="history[]category">
+                                <optgroup label="Futebol 5">
+                                    <option value="junior-g">Petizes</option>
+                                </optgroup>
+                                <optgroup label="Futebol 7">    
+                                    <option value="junior-f">Traquinas</option>
+                                    <option value="junior-e">Benjamins</option>
+                                </optgroup>
+                                <optgroup label="Futebol 9">    
+                                    <option value="junior-d">Infantis</option>
+                                </optgroup>
+                                <optgroup label="Futebol 11">
+                                    <option value="junior-c">Iniciados</option>
+                                    <option value="junior-b" selected>Juvenis</option>
+                                    <option value="junior-a">Juniore</option>
+                                    <option value="senior">Séniores</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <input type="button" value="Adicionar linha">
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </fieldset>
+        <input type="submit" value="Gerar CV" />
+    </form>
+</body>
+</html>
