@@ -6,11 +6,11 @@ module.exports = async function (context, req) {
   const targetUrl = `https://www.fpf.pt/${req.query.url}`;
 
   const headers = Object.keys(req.headers)
-    .filter((k) => k.startsWith("px-"))
+    .filter((k) => k.startsWith("x-"))
     .reduce(
       (acc, cur) => ({
         ...acc,
-        [cur.slice(3)]: req.headers[cur],
+        [cur.slice(2)]: req.headers[cur],
       }),
       {}
     );
