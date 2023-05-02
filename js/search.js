@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       method: "POST",
       headers: [
-        ["px-Content-Type", "application/json"],
-        ["px-moduleid", 503],
-        ["px-tabid", 150],
+        ["x-content-type", "application/json"],
+        ["x-moduleid", 503],
+        ["x-tabid", 150],
       ],
       body: JSON.stringify({
         filter: {
