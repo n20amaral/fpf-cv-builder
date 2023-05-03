@@ -1,19 +1,27 @@
-
-
+let playerId;
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
-  const playerId = params.get("playerId");
+  playerId = params.get("playerId");
 
   let player = {};
   if (playerId) {
-    player = await getPlayerData(playerId);
+    player = await getPlayerData();
     loadFormData(player);
+  } else {
+    playerId = new Date().getTime();
   }
 
-  addAllEventListeners(player);
+  addAllEventListeners();
 });
 
-const getPlayerData = async (playerId) => {
+const getPlayerData = async () => {
+  const lastTS = parseInt(localStorage.getItem(`MY-CV-${playerId}-TS`), 10);
+  const currentTS = new Date().getTime();
+  
+  if(!isNaN(lastTS) && currentTS - lastTS < 60 * 60 * 100) {
+    return JSON.parse(localStorage.getItem(`MY-CV-${playerId}`));
+  }
+
   const response = await fetch(
     `https://fpf-proxy-server.azurewebsites.net/api/search?url=${encodeURIComponent(
       "pt/Jogadores/Ficha-de-Jogador/playerId/"
@@ -62,7 +70,7 @@ const loadFormData = (player) => {
   document.getElementById("date-of-birth").value = player.dateOfBirth;
   document.getElementById("country").value = player.country;
 
-  document.getElementById("photo").setAttribute("src", player.photoUrl);
+  document.getElementById("photo").setAttribute("src", localStorage.getItem(player.photoUrl) || player.photoUrl);
 
   const rows = player.history.map((c) => {
     const row = createNewRecord();
@@ -105,7 +113,9 @@ const convertFullDateToString = (fullDate) => {
   return new Date(...dateParts.reverse()).toISOString().split("T")[0];
 };
 
-const addAllEventListeners = (player) => {
+const addAllEventListeners = () => {
+  document.getElementById("photo-file").addEventListener("change", onPhotoSelect);
+
   document.getElementById("create-cv-form").addEventListener("submit", onFormSubmit);
 
   document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
@@ -146,6 +156,7 @@ const onClearFields = evt => {
 };
 
 const onFormSubmit = evt => {
+  evt.preventDefault();
   const formData = new FormData(evt.target);
 
     const playerData = [...formData.entries()]
@@ -176,35 +187,25 @@ const onFormSubmit = evt => {
         }
       }, {});
 
-      console.log(document.getElementById('photo-url'));
+      playerData.photoUrl = playerData.photoFile.name || document.getElementById("photo").getAttribute("src");
 
-      if(playerData.photoUrl.name) {
-        saveFileToLocalStorage();
-        playerData.photoUrl = localStorage.getItem("savedFile");
-      } else {
-        playerData.photoUrl = document.getElementById("photo").getAttribute("src");
-      }
-
-
-      localStorage.setItem("MY-CV", JSON.stringify(playerData));
+      localStorage.setItem(`MY-CV-${playerId}`, JSON.stringify(playerData));
+      localStorage.setItem(`MY-CV-${playerId}-TS`, new Date().getTime());
+      
+      window.location.href = `${evt.target.getAttribute("action")}?playerId=${playerId}`;
 }
 
-const savPhotoToLocalStorage = () => {
-  const fileInput = document.getElementById('photo-url');
-  const file = fileInput.files[0];
+const onPhotoSelect = ({target}) => {
+  const image = document.getElementById("photo");
+  const file = target.files[0];
+  const reader = new FileReader();
 
-  if (file) {
-    const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    image.setAttribute("src", reader.result);
+    localStorage.setItem(file.name, reader.result);
+  }, false);
+
+  if(file) {
     reader.readAsDataURL(file);
-
-    reader.onload = function (event) {
-      const base64Data = event.target.result;
-      localStorage.setItem("savedFile", base64Data);
-    };
-    reader.onerror = function (error) {
-      console.log('Error reading file:', error);
-    };
-  } else {
-    console.log('No file selected.');
   }
 }

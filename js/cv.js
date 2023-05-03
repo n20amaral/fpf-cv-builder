@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const {fullName, dateOfBirth, country, photoUrl, history} = JSON.parse(localStorage.getItem("MY-CV"));
+  const params = new URLSearchParams(window.location.search);
+  const playerId = params.get("playerId");
+
+  const {fullName, dateOfBirth, country, photoUrl, history} = JSON.parse(localStorage.getItem(`MY-CV-${playerId}`));
 
   const personalData = document.getElementById("personal-data");
   const image = personalData.querySelector("img");
-  image.setAttribute("src", photoUrl);
+  image.setAttribute("src", localStorage.getItem(photoUrl) || photoUrl);
   image.setAttribute("alt", `Foto de perfil de ${fullName}`);
 
   personalData.querySelector("dt#name-term+dd").textContent = fullName;

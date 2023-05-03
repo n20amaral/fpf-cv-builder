@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 const fetchPlayers = async (name) => {
+  const lastTS = parseInt(localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}-TS`), 10);
+  const currentTS = new Date().getTime();
+
+  if(!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 100)) {
+    const searchCache = localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}`);
+    if(searchCache) {
+      return JSON.parse(searchCache);
+    }
+  }
+
   const allPlayers = [];
   let currentPage = 1;
   let playersTotal;
@@ -40,6 +50,9 @@ const fetchPlayers = async (name) => {
     playersTotal = data.Total;
     currentPage++;
   }
+
+  localStorage.setItem(`MY-SEARCH-${name.toLowerCase()}`, JSON.stringify(allPlayers));
+  localStorage.setItem(`MY-SEARCH-${name.toLowerCase()}-TS`, new Date().getTime());
 
   return allPlayers;
 };
