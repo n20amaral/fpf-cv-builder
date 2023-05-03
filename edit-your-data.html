@@ -32,10 +32,10 @@
                     </tr>
                 </thead>
                 <tbody id="history-container">
-                    <tr id="history-placeholder">
+                    <tr class="history-record">
                         <td>
-                            <input type="number" value="">
-                            <input type="text" value="" disabled>
+                            <input type="number" min="1980" name="startYear" value="">
+                            <input type="text" name="endYear" value="" disabled>
                             <input type="hidden" name="history[]season" value="">
                         </td>
                         <td>
@@ -46,7 +46,7 @@
                             </select>
                         </td>
                         <td>
-                            <input type="text" name="history[]club" value="" />
+                            <input type="text" name="history[]club" value="" required />
                         </td>
                         <td>
                             <select name="history[]category">

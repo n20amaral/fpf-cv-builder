@@ -1,16 +1,16 @@
-let player = {};
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const playerId = params.get("playerId");
 
+  let player = {};
   if (playerId) {
     player = await getPlayerData(playerId);
-    loadFormData();
+    loadFormData(player);
   }
 
-  document.getElementById("create-cv-form").addEventListener("submit", () => {
-    localStorage.setItem("MY-CV", JSON.stringify(player));
-  });
+  addAllEventListeners(player);
 });
 
 const getPlayerData = async (playerId) => {
@@ -57,7 +57,7 @@ const getPlayerData = async (playerId) => {
   };
 };
 
-const loadFormData = () => {
+const loadFormData = (player) => {
   document.getElementById("full-name").value = player.fullName;
   document.getElementById("date-of-birth").value = player.dateOfBirth;
   document.getElementById("country").value = player.country;
@@ -65,7 +65,7 @@ const loadFormData = () => {
   document.getElementById("photo").setAttribute("src", player.photoUrl);
 
   const rows = player.history.map((c) => {
-    const row = document.getElementById("history-placeholder").cloneNode(true);
+    const row = document.querySelector(".history-record:first-child").cloneNode(true);
     const [season, sport, club, category] = row.getElementsByTagName("td");
 
     season.querySelector('input[type="number"]').value = c.season.split("-")[0];
@@ -111,3 +111,18 @@ const convertFullDateToString = (fullDate) => {
 
   return new Date(...dateParts.reverse()).toISOString().split("T")[0];
 };
+
+const addAllEventListeners = (player) => {
+  document.getElementById("create-cv-form").addEventListener("submit", () => {
+    localStorage.setItem("MY-CV", JSON.stringify(player));
+  });
+
+  document.querySelectorAll('.history-record > td:first-child > input[type="number"]').forEach(e => 
+    e.addEventListener("change", ({target}) => {
+      const seasonEnd = target.nextElementSibling;
+      const fullSeason = seasonEnd.nextElementSibling;
+      const nextYear = `${Number(target.value) + 1}`;
+      seasonEnd.value = nextYear.length > 2 ? nextYear.slice(-2) : nextYear;
+      fullSeason.value = `${target.value}-${seasonEnd.value}`;
+    }));
+}
