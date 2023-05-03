@@ -91,32 +91,10 @@ const loadFormData = (player) => {
   document.getElementById("history-container").replaceChildren(...rows);
 };
 
-const convertFullDateToString = (fullDate) => {
-  const dateParts = fullDate.split(" de ");
-  const months = [
-    "janeiro",
-    "fevereiro",
-    "março",
-    "abril",
-    "maio",
-    "junho",
-    "julho",
-    "agosto",
-    "setembro",
-    "outubro",
-    "novembro",
-    "dezembro",
-  ];
-
-  dateParts[1] = months.findIndex((m) => m === dateParts[1].toLowerCase());
-
-  return new Date(...dateParts.reverse()).toISOString().split("T")[0];
-};
-
 const addAllEventListeners = () => {
-  document.getElementById("photo-file").addEventListener("change", onPhotoSelect);
-
   document.getElementById("create-cv-form").addEventListener("submit", onFormSubmit);
+  document.getElementById("photo-file").addEventListener("change", onPhotoSelect);
+  addRowEventListeners(document.querySelector(".history-record:first-child"));
 
   document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
     const row = createNewRecord();
@@ -124,13 +102,17 @@ const addAllEventListeners = () => {
   });
 }
 
+const addRowEventListeners = (row) => {
+  row.querySelector('input[name="startYear"]').addEventListener("change", onSeasonChange);
+  row.querySelector("button.remove-record").addEventListener("click", onRemoveRecord);
+  const clearButton = row.querySelector("button.clear-fields");
+  clearButton.addEventListener("click", onClearFields);
+  clearButton.click();
+}
+
 const createNewRecord = () => {
     const row = document.querySelector(".history-record:last-child").cloneNode(true);
-    row.querySelector('input[name="startYear"]').addEventListener("change", onSeasonChange);
-    row.querySelector("button.remove-record").addEventListener("click", onRemoveRecord);
-    const clearButton = row.querySelector("button.clear-fields");
-    clearButton.addEventListener("click", onClearFields);
-    clearButton.click();
+    addRowEventListeners(row);
     
     return row;
 }
@@ -209,3 +191,25 @@ const onPhotoSelect = ({target}) => {
     reader.readAsDataURL(file);
   }
 }
+
+const convertFullDateToString = (fullDate) => {
+  const dateParts = fullDate.split(" de ");
+  const months = [
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
+    "dezembro",
+  ];
+
+  dateParts[1] = months.findIndex((m) => m === dateParts[1].toLowerCase());
+
+  return new Date(...dateParts.reverse()).toISOString().split("T")[0];
+};

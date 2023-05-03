@@ -60,18 +60,23 @@ const fetchPlayers = async (name) => {
 const loadPlayerList = (players) => {
   const items = players.map((p, i) => {
     const li = document.createElement("li");
+    
     const radio = document.createElement("input");
     radio.setAttribute("id", `player-pick-${i}`);
     radio.setAttribute("type", "radio");
     radio.setAttribute("name", "playerId");
     radio.setAttribute("value", p.Id);
+    radio.addEventListener("change", onRadioCheck);
+
     const label = document.createElement("label");
     label.setAttribute("for", `player-pick-${i}`);
     label.textContent = `${p.ShortDescription} (${p.ClubName}) [${p.FootballType}]`;
+    
     li.append(radio, label);
     return li;
   });
 
+  document.querySelector("div.loading").remove();
   document.getElementById("player-list").append(...items);
 };
 
@@ -88,3 +93,7 @@ const goToNextPage = ({ target }) => {
 
   window.location.href = url;
 };
+
+const onRadioCheck = () => {
+  document.querySelector('button[disabled]')?.removeAttribute("disabled");
+}
