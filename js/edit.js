@@ -65,7 +65,7 @@ const loadFormData = (player) => {
   document.getElementById("photo").setAttribute("src", player.photoUrl);
 
   const rows = player.history.map((c) => {
-    const row = document.querySelector(".history-record:first-child").cloneNode(true);
+    const row = createNewRecord();
     const [season, sport, club, category] = row.getElementsByTagName("td");
 
     season.querySelector('input[type="number"]').value = c.season.split("-")[0];
@@ -73,21 +73,14 @@ const loadFormData = (player) => {
       .split("-")[1]
       .slice(-2);
     season.querySelector('input[type="hidden"]').value = c.season;
-
-    [...sport.getElementsByTagName("option")]
-      .find((o) => o.textContent.toLowerCase() === c.sport)
-      .setAttribute("selected", true);
-
+    sport.querySelector("select").value = c.sport;
     club.firstElementChild.value = c.club;
-
-    [...category.getElementsByTagName("option")]
-      .find((o) => o.value === c.category)
-      .setAttribute("selected", true);
+    category.querySelector("select").value = c.category;
 
     return row;
   });
 
-  document.getElementById("history-container").prepend(...rows);
+  document.getElementById("history-container").replaceChildren(...rows);
 };
 
 const convertFullDateToString = (fullDate) => {
@@ -117,12 +110,39 @@ const addAllEventListeners = (player) => {
     localStorage.setItem("MY-CV", JSON.stringify(player));
   });
 
-  document.querySelectorAll('.history-record > td:first-child > input[type="number"]').forEach(e => 
-    e.addEventListener("change", ({target}) => {
-      const seasonEnd = target.nextElementSibling;
-      const fullSeason = seasonEnd.nextElementSibling;
-      const nextYear = `${Number(target.value) + 1}`;
-      seasonEnd.value = nextYear.length > 2 ? nextYear.slice(-2) : nextYear;
-      fullSeason.value = `${target.value}-${seasonEnd.value}`;
-    }));
+  document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
+    const row = createNewRecord();
+    document.getElementById("history-container").append(row);
+  });
 }
+
+const createNewRecord = () => {
+    const row = document.querySelector(".history-record:last-child").cloneNode(true);
+    row.querySelector('input[name="startYear"]').addEventListener("change", onSeasonChange);
+    row.querySelector("button.remove-record").addEventListener("click", onRemoveRecord);
+    const clearButton = row.querySelector("button.clear-fields");
+    clearButton.addEventListener("click", onClearFields);
+    clearButton.click();
+    
+    return row;
+}
+
+const onSeasonChange = ({target}) => {
+  const seasonEnd = target.nextElementSibling;
+  const fullSeason = seasonEnd.nextElementSibling;
+  const nextYear = `${Number(target.value) + 1}`;
+  seasonEnd.value = nextYear.length > 2 ? nextYear.slice(-2) : nextYear;
+  fullSeason.value = `${target.value}-${seasonEnd.value}`;
+};
+
+const onRemoveRecord = evt => {
+  evt.preventDefault();
+  evt.target.parentElement.parentElement.remove();
+}
+
+const onClearFields = evt => {
+  evt.preventDefault();
+  const row = evt.target.parentElement.parentElement;
+  row.querySelectorAll("input").forEach(i => i.value = "");
+  row.querySelectorAll("select").forEach(s => s.value = "");
+};
