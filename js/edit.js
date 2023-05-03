@@ -106,9 +106,7 @@ const convertFullDateToString = (fullDate) => {
 };
 
 const addAllEventListeners = (player) => {
-  document.getElementById("create-cv-form").addEventListener("submit", () => {
-    localStorage.setItem("MY-CV", JSON.stringify(player));
-  });
+  document.getElementById("create-cv-form").addEventListener("submit", onFormSubmit);
 
   document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
     const row = createNewRecord();
@@ -146,3 +144,67 @@ const onClearFields = evt => {
   row.querySelectorAll("input").forEach(i => i.value = "");
   row.querySelectorAll("select").forEach(s => s.value = "");
 };
+
+const onFormSubmit = evt => {
+  const formData = new FormData(evt.target);
+
+    const playerData = [...formData.entries()]
+      .reduce((acc, [key, value]) => {
+        // non-array fields
+        if(!key.includes("[]")) {
+          return { ...acc, [key]: value};
+        }
+      
+        const [prefix, prop] = key.split("[]");
+        const allValues = formData.getAll(key);
+
+        // first of all fields
+        if(!acc[prefix]) {
+          return { ...acc, [prefix]: allValues.map(v => ({[prop]: v})) };
+        }
+
+        // field already been processed
+        if(acc[prefix].some(item => item.hasOwnProperty(prop)))
+        {
+          return acc;
+        }
+
+        // get all values for field
+        return {
+          ...acc,
+          [prefix]: acc[prefix].map((item, i) => ({...item, [prop]: allValues[i]}))
+        }
+      }, {});
+
+      console.log(document.getElementById('photo-url'));
+
+      if(playerData.photoUrl.name) {
+        saveFileToLocalStorage();
+        playerData.photoUrl = localStorage.getItem("savedFile");
+      } else {
+        playerData.photoUrl = document.getElementById("photo").getAttribute("src");
+      }
+
+
+      localStorage.setItem("MY-CV", JSON.stringify(playerData));
+}
+
+const savPhotoToLocalStorage = () => {
+  const fileInput = document.getElementById('photo-url');
+  const file = fileInput.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function (event) {
+      const base64Data = event.target.result;
+      localStorage.setItem("savedFile", base64Data);
+    };
+    reader.onerror = function (error) {
+      console.log('Error reading file:', error);
+    };
+  } else {
+    console.log('No file selected.');
+  }
+}
