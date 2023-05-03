@@ -1,32 +1,48 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const fullName = params.get("fullName");
-  const response = await fetch(
-    `https://fpf-proxy-server.azurewebsites.net/api/search?url=${encodeURIComponent(
-      "DesktopModules/MVC/SearchPlayers/Default/GetInternalPlayers"
-    )}`,
-    {
-      method: "POST",
-      headers: [
-        ["x-content-type", "application/json"],
-        ["x-moduleid", 503],
-        ["x-tabid", 150],
-      ],
-      body: JSON.stringify({
-        filter: {
-          PlayerName: fullName,
-        },
-      }),
-    }
-  );
 
-  const data = await response.json();
-  loadPlayerList(data.Result);
+  loadPlayerList(await fetchPlayers(fullName));
 
   for (const button of document.getElementsByTagName("button")) {
     button.addEventListener("click", goToNextPage);
   }
 });
+
+const fetchPlayers = async (name) => {
+  const allPlayers = [];
+  let currentPage = 1;
+  let playersTotal;
+
+  while (playersTotal === undefined || allPlayers.length < playersTotal) {
+    const response = await fetch(
+      `https://fpf-proxy-server.azurewebsites.net/api/search?url=${encodeURIComponent(
+        "DesktopModules/MVC/SearchPlayers/Default/GetInternalPlayers"
+      )}`,
+      {
+        method: "POST",
+        headers: [
+          ["x-content-type", "application/json"],
+          ["x-moduleid", 503],
+          ["x-tabid", 150],
+        ],
+        body: JSON.stringify({
+          filter: {
+            PlayerName: name,
+            Page: currentPage,
+          },
+        }),
+      }
+    );
+
+    const data = await response.json();
+    allPlayers.push(...data.Result);
+    playersTotal = data.Total;
+    currentPage++;
+  }
+
+  return allPlayers;
+};
 
 const loadPlayerList = (players) => {
   const items = players.map((p, i) => {
