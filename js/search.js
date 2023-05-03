@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const fullName = params.get("fullName");
   const response = await fetch(
-    `http://localhost:7071/api/search?url=${encodeURIComponent(
+    `https://fpf-proxy-server.azurewebsites.net/api/search?url=${encodeURIComponent(
       "DesktopModules/MVC/SearchPlayers/Default/GetInternalPlayers"
     )}`,
     {

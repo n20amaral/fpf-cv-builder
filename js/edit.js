@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const getPlayerData = async (playerId) => {
   const response = await fetch(
-    `http://localhost:7071/api/search?url=${encodeURIComponent(
+    `https://fpf-proxy-server.azurewebsites.net/api/search?url=${encodeURIComponent(
       "pt/Jogadores/Ficha-de-Jogador/playerId/"
     )}${playerId}`
   );
