@@ -1,0 +1,51 @@
+body {
+    background-color: #040609;
+    background-color: #1E6CAF;
+    /*
+    background-color: #043354;
+    background-color: #8BB2CF;
+    background-color: #ADC5DA;
+    */
+}
+
+body > div.container {
+    background-image: url('../assets/grass.jpg');
+    background-size: cover;
+}
+
+header, main {
+    text-align: center;
+}
+
+header > img {
+    max-height: 25vh;
+}
+
+header > h1 { 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    color: #FFF;
+    text-shadow: 5px 5px 5px #000;
+}
+
+input {
+    margin: 1vh auto;
+    display: block;
+    font-size: 3vh;
+    line-height: 5vh;
+}
+
+#full-name {
+    width: 80%;
+    padding: 0.2em 0.5em;
+}
+
+input[type="submit"] {
+    padding: 0.2em 1.2em;
+    font-size: 1.8em;
+    line-height: 2em;
+}
+
+form {
+    text-align: center;
+}

@@ -1,0 +1,43 @@
+body {
+    background-color: #040609;
+    background-color: #1E6CAF;
+    /*
+    background-color: #043354;
+    background-color: #8BB2CF;
+    background-color: #ADC5DA;
+    */
+}
+
+div.container {
+    background-color: #ADC5DA;
+    padding-bottom: 50px;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #043354;
+}
+
+main ul {
+    height: 50vh;
+    margin-bottom: 50px;
+    overflow: auto;
+}
+
+main li {
+    font-weight: 500;
+    font-size: 1.5em;
+    line-height: 1.8em;
+}
+
+main input[type="radio"] {
+    height: 1.5em;
+    width: 1.5em;
+    margin-right: 2vw;
+}
+
+main button {
+    padding: 0.5em 1.2em;
+    font-size: 1.2em;
+    line-height: 1.7em;
+}
