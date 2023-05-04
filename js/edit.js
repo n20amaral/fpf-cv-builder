@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadFormData(player);
   } else {
     playerId = new Date().getTime();
+    const emptyRow = document.querySelector(".history-record:first-child");
+    addRowEventListeners(emptyRow);
   }
 
   addAllEventListeners();
@@ -76,8 +78,8 @@ const loadFormData = (player) => {
     const row = createNewRecord();
     const [season, sport, club, category] = row.getElementsByTagName("td");
 
-    season.querySelector('input[type="number"]').value = c.season.split("-")[0];
-    season.querySelector('input[type="text"]').value = c.season
+    season.querySelector('input[type="number"]').value = c.startYear || c.season.split("-")[0];
+    season.querySelector('input[type="text"]').value = c.endYear || c.season
       .split("-")[1]
       .slice(-2);
     season.querySelector('input[type="hidden"]').value = c.season;
@@ -94,8 +96,7 @@ const loadFormData = (player) => {
 const addAllEventListeners = () => {
   document.getElementById("create-cv-form").addEventListener("submit", onFormSubmit);
   document.getElementById("photo-file").addEventListener("change", onPhotoSelect);
-  addRowEventListeners(document.querySelector(".history-record:first-child"));
-
+  
   document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
     const row = createNewRecord();
     document.getElementById("history-container").append(row);
@@ -103,7 +104,7 @@ const addAllEventListeners = () => {
 }
 
 const addRowEventListeners = (row) => {
-  row.querySelector('input[name="startYear"]').addEventListener("change", onSeasonChange);
+  row.querySelector('input[name="history[]startYear"]').addEventListener("change", onSeasonChange);
   row.querySelector("button.remove-record").addEventListener("click", onRemoveRecord);
   const clearButton = row.querySelector("button.clear-fields");
   clearButton.addEventListener("click", onClearFields);

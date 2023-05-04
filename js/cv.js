@@ -31,4 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelector("#club-history > dl").append(...terms.flat());
+
+    document.querySelector("nav a:first-of-type").href = `edit-your-data.html?playerId=${playerId}`
 });

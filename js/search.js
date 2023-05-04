@@ -77,6 +77,7 @@ const loadPlayerList = (players) => {
   });
 
   document.querySelector("div.loading").remove();
+  document.getElementById("new-cv")?.removeAttribute("disabled");
   document.getElementById("player-list").append(...items);
 };
 
