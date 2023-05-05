@@ -1,91 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPF CV Builder</title>
+    <title>Footballer CV - Edit Your Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/edit.css">
 </head>
+
 <body>
-    <h1>Alguma correção a fazer?</h1>
-    <form id="create-cv-form" method="GET" action="my-footballer-cv.html">
-        <fieldset id="photo-id">
-            <img id="photo" src="assets/placeholder_Male.png" alt="foto de perfil" />
-            <input type="file" name="photoFile" id="photo-file">
-        </fieldset>
-        <fieldset id="personal-data">
-            <label for="full-name">Nome Completo</label>
-            <input id="full-name" name="fullName" type="text" value="" />
-            <label for="date-of-birth">Data Nascimento</label>
-            <input id="date-of-birth" name="dateOfBirth" type="date" value="" />
-            <label for="country">Naturalidade</label>
-            <input id="country" name="country" type="text" value="" />
-        </fieldset>
-        <fieldset id="club-history">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Época</th>
-                        <th>Modalidade</th>
-                        <th>Clube</th>
-                        <th>Escalão</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="history-container">
-                    <tr class="history-record">
-                        <td>
-                            <input type="number" min="1920" name="history[]startYear" value="" required>
-                            <input type="text" name="history[]endYear" value="" readonly>
-                            <input type="hidden" name="history[]season" value="">
-                        </td>
-                        <td>
-                            <select name="history[]sport" required>
-                                <option value="futebol">Futebol</option>
-                                <option value="futsal">Futsal</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" name="history[]club" value="" required />
-                        </td>
-                        <td>
-                            <select name="history[]category" required>
-                                <option></option>
-                                <optgroup label="Futebol 5">
-                                    <option value="junior-g">Petizes</option>
-                                </optgroup>
-                                <optgroup label="Futebol 7">    
-                                    <option value="junior-f">Traquinas</option>
-                                    <option value="junior-e">Benjamins</option>
-                                </optgroup>
-                                <optgroup label="Futebol 9">    
-                                    <option value="junior-d">Infantis</option>
-                                </optgroup>
-                                <optgroup label="Futebol 11">
-                                    <option value="junior-c">Iniciados</option>
-                                    <option value="junior-b">Juvenis</option>
-                                    <option value="junior-a">Juniore</option>
-                                    <option value="senior">Séniores</option>
-                                </optgroup>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="clear-fields">Clear</button>
-                            <button class="remove-record">Remove</button>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">
-                            <input type="button" value="Adicionar linha">
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </fieldset>
-        <input type="submit" value="Gerar CV" />
-    </form>
+    <div class="container">
+        <header>
+            <h1>Alguma correção a fazer?</h1>
+        </header>
+        <main>
+            <form id="create-cv-form" method="GET" action="my-footballer-cv.html">
+                <fieldset id="photo-id">
+                    <img id="photo" src="assets/placeholder_Male.png" alt="foto de perfil" />
+                    <input type="file" name="photoFile" id="photo-file">
+                </fieldset>
+                <fieldset id="personal-data">
+                    <div class="form-control">
+                        <label for="full-name">Nome Completo</label>
+                        <input id="full-name" name="fullName" type="text" value="" />
+                    </div>
+                    <div class="form-control">
+                        <label for="date-of-birth">Data Nascimento</label>
+                        <input id="date-of-birth" name="dateOfBirth" type="date" value="" />
+                    </div>
+                    <div class="form-control">
+                        <label for="country">Naturalidade</label>
+                        <input id="country" name="country" type="text" value="" />
+                    </div>
+                </fieldset>
+                <fieldset id="club-history">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Época</th>
+                                <th>Modalidade</th>
+                                <th>Clube</th>
+                                <th>Escalão</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-container">
+                            <tr class="history-record">
+                                <td>
+                                    <input type="number" min="1920" name="history[]startYear" value="" required>
+                                    <input type="text" name="history[]endYear" value="" readonly>
+                                    <input type="hidden" name="history[]season" value="">
+                                </td>
+                                <td>
+                                    <select name="history[]sport" required>
+                                        <option value="futebol">Futebol</option>
+                                        <option value="futsal">Futsal</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="history[]club" value="" required />
+                                </td>
+                                <td>
+                                    <select name="history[]category" required>
+                                        <option></option>
+                                        <optgroup label="Futebol 5">
+                                            <option value="junior-g">Petizes</option>
+                                        </optgroup>
+                                        <optgroup label="Futebol 7">
+                                            <option value="junior-f">Traquinas</option>
+                                            <option value="junior-e">Benjamins</option>
+                                        </optgroup>
+                                        <optgroup label="Futebol 9">
+                                            <option value="junior-d">Infantis</option>
+                                        </optgroup>
+                                        <optgroup label="Futebol 11">
+                                            <option value="junior-c">Iniciados</option>
+                                            <option value="junior-b">Juvenis</option>
+                                            <option value="junior-a">Juniores</option>
+                                            <option value="senior">Séniores</option>
+                                        </optgroup>
+                                    </select>
+                                </td>
+                                <td>
+                                    <button class="button clear-fields"></button>
+                                    <button class="button remove-record"></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <input class="button" type="button" value="+">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </fieldset>
+                <input class="button" type="submit" value="Gerar CV" />
+            </form>
+        </main>
+    </div>
+    <footer>
+        <nav>
+            <h3>Footballer CV</h3>
+            <ul>
+                <li>
+                    <a href="help.html">Tenho dúvidas, preciso de ajuda!</a>
+                </li>
+            </ul>
+            <small>&copy; 2023</small>
+        </nav>
+        <nav>
+            <h3>Últimos CV</h3>
+            <ul>
+                <li>
+                    <a href="#">Zé Manel</a>
+                </li>
+                <li>
+                    <a href="#">Zé João</a>
+                </li>
+                <li>
+                    <a href="#">Zé Carlos</a>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <h3>Powered By:</h3>
+            <ul>
+                <li>
+                    <a href="https://fpf.pt" target="_blank">Federaçao Portuguesa de Futebol</a>
+                </li>
+                <li>
+                    <a href="https://freelogodesign.org/" target="_blank">Free Logo Design</a>
+                </li>
+                <li>
+                    <a href="https://unsplash.com/" target="_blank">Unsplash</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <hr>
+    <aside>
+        My notes HERE
+    </aside>
     <script src="js/edit.js"></script>
 </body>
+
 </html>

@@ -13,7 +13,7 @@ const fetchPlayers = async (name) => {
   const lastTS = parseInt(localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}-TS`), 10);
   const currentTS = new Date().getTime();
 
-  if(!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 100)) {
+  if(!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 1000)) {
     const searchCache = localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}`);
     if(searchCache) {
       return JSON.parse(searchCache);

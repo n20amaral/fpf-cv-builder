@@ -20,7 +20,7 @@ const getPlayerData = async () => {
   const lastTS = parseInt(localStorage.getItem(`MY-CV-${playerId}-TS`), 10);
   const currentTS = new Date().getTime();
   
-  if(!isNaN(lastTS) && currentTS - lastTS < 60 * 60 * 100) {
+  if(!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 1000)) {
     return JSON.parse(localStorage.getItem(`MY-CV-${playerId}`));
   }
 

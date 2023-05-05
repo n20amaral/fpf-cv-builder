@@ -1,13 +1,3 @@
-body {
-    background-color: #040609;
-    background-color: #1E6CAF;
-    /*
-    background-color: #043354;
-    background-color: #8BB2CF;
-    background-color: #ADC5DA;
-    */
-}
-
 body > div.container {
     background-image: url('../assets/grass.jpg');
     background-size: cover;
