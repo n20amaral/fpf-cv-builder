@@ -97,7 +97,7 @@ const addAllEventListeners = () => {
   document.getElementById("create-cv-form").addEventListener("submit", onFormSubmit);
   document.getElementById("photo-file").addEventListener("change", onPhotoSelect);
   
-  document.querySelector('#club-history tfoot input[type="button"]').addEventListener("click", evt => {
+  document.querySelector('#club-history .button.add-record').addEventListener("click", () => {
     const row = createNewRecord();
     document.getElementById("history-container").append(row);
   });
