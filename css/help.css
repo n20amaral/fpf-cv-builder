@@ -1,0 +1,83 @@
+div.container {
+    background-color: #ADC5DA;
+    padding-bottom: 50px;
+}
+
+body > div.container > header {
+    padding-bottom: 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+body > div.container > main {
+    padding-top: 0;
+    line-height: 1.5em;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#fixed-logo {
+    position: fixed;
+    right: 20px;
+    top: 20px
+}
+
+#fixed-logo img {
+    height: 100px;
+}
+
+header > a:first-of-type {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+header ul {
+    list-style: initial;
+    padding-left: 40px;
+}
+
+header ul ul {
+    list-style-type: circle;
+}
+
+.container h2 {
+    margin-top: 50px;
+    padding-bottom: 15px;
+    border-bottom: 5px double #1E6CAF;
+}
+
+.container h3,
+.container h3 + p,
+.container h3 + p ~ p {
+    padding-left: 40px;
+}
+
+.container h3:not(:first-of-type) {
+    margin-top: 50px;
+}
+
+.container a {
+    color: #043354;
+}
+
+.container a:hover{
+    color: #1E6CAF;
+}
+
+.container small::before {
+    content: '(';
+}
+
+.container small::after {
+    content: ')';
+}
+
+main a:has(> small)
+{
+    position: absolute;
+    right: 10%;
+}
+
+main p:last-of-type {
+    text-align: center;
+}

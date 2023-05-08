@@ -18,6 +18,13 @@ header > h1 {
     text-shadow: 5px 5px 5px #000;
 }
 
+form {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
 input {
     margin: 1vh auto;
     display: block;
@@ -26,7 +33,7 @@ input {
 }
 
 #full-name {
-    width: 80%;
+    width: 100%;
     padding: 0.2em 0.5em;
 }
 
@@ -36,6 +43,3 @@ input[type="submit"] {
     line-height: 2em;
 }
 
-form {
-    text-align: center;
-}
