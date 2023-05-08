@@ -1,35 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPF CV Builder</title>
+    <title>Footballer CV - My CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/cv.css">
 </head>
+
 <body>
-    <h1>O meu CV Futebolístico</h1>
-    <nav>
-        <ul>
-            <li><a href="#">Voltar atrás</a></li>
-            <li><a href="javascript:window.print()">Imprimir</a></li>
-        </ul>
-    </nav>
-    <article>
-        <section id="personal-data">
-            <img src="assets/placeholder_Male.png" />
-            <dl>
-                <dt id="name-term">Nome</dt>
-                <dd></dd>
-                <dt id="date-of-birth-term">Data Nascimento</dt>
-                <dd></dd>
-                <dt id="country-term">Naturalidade</dt>
-                <dd></dd>
-            </dl>
-        </section>
-        <section id="club-history">
-            <dl></dl>
-        </section>
-    </article>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#"><img src="assets/back.png" alt="Botão voltar atrás"></a></li>
+                    <li><a href="javascript:window.print()"><img src="assets/printer.png" alt="Botão para imprimir"></a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div id="banner">
+                <img src="assets/banner.jpg" alt="banner image of people playing football, for dcoument header">
+                <h1>My Footballer CV</h1>
+            </div>
+            <article>
+                <section id="personal-data">
+                    <img src="assets/placeholder_Male.png" />
+                    <dl>
+                        <dt id="name-term">Nome</dt>
+                        <dd></dd>
+                        <dt id="date-of-birth-term">Data Nascimento</dt>
+                        <dd></dd>
+                        <dt id="country-term">Naturalidade</dt>
+                        <dd></dd>
+                    </dl>
+                </section>
+                <section id="club-history">
+                    <h2>Histórico Épocas</h2>
+                    <dl></dl>
+                </section>
+            </article>
+        </main>
+    </div>
+    <footer>
+        <nav>
+            <h3>Footballer CV</h3>
+            <ul>
+                <li>
+                    <a href="help.html">Tenho dúvidas, preciso de ajuda!</a>
+                </li>
+            </ul>
+            <small>&copy; 2023</small>
+        </nav>
+        <nav>
+            <h3>Últimos CV</h3>
+            <ul>
+                <li>
+                    <a href="#">Zé Manel</a>
+                </li>
+                <li>
+                    <a href="#">Zé João</a>
+                </li>
+                <li>
+                    <a href="#">Zé Carlos</a>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <h3>Powered By:</h3>
+            <ul>
+                <li>
+                    <a href="https://fpf.pt" target="_blank">Federaçao Portuguesa de Futebol</a>
+                </li>
+                <li>
+                    <a href="https://freelogodesign.org/" target="_blank">Free Logo Design</a>
+                </li>
+                <li>
+                    <a href="https://unsplash.com/" target="_blank">Unsplash</a>
+                </li>
+                <li>
+                    Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a>
+                </li>
+                <li>
+                    Photo by <a href="https://unsplash.com/@alliancefc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alliance Football Club</a> on <a href="https://unsplash.com/photos/TPF963E7G88?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <hr>
+    <aside>
+        My notes HERE
+    </aside>
     <script src="js/cv.js"></script>
 </body>
+
 </html>

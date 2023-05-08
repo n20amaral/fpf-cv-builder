@@ -1,0 +1,140 @@
+@page {
+    size: A4;
+    margin: 0;
+  } 
+  
+  @media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+    }
+    
+    header, footer, aside, hr {
+        display: none !important;
+    }
+}
+
+dt, h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+div.container {
+    background-color: #ADC5DA;
+    padding-bottom: 50px;
+}
+
+header ul {
+    display: flex;
+    gap: 30px
+}
+
+header li a{
+    background-color: #8BB2CF;
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header li a:hover {
+    background-color: #8BB2CF80;
+}
+
+header li img {
+    max-height: 32px;
+}
+
+#banner {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner > img {
+    position: absolute;
+    bottom: -6vh;
+    width: 100vw;
+    filter: grayscale() blur(2px);
+    z-index: 10;
+}
+
+#banner > h1 {
+    position: relative;
+    z-index: 20;
+    color: #043354;
+    text-shadow:
+    1px 1px 0px #fff,
+    -1px -1px 0px #fff,
+    1px -1px 0px #fff,
+    -1px 1px 0px #fff
+    ;
+}
+
+#personal-data {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+#personal-data > img{
+    height: 250px;
+    border: 2px solid #043354;
+}
+
+#personal-data > dl{ 
+    flex-grow: 1;
+    margin-top: 0;
+}
+
+#personal-data dt, #club-history h2 {
+    display: block;
+    padding: 5px 20px;
+    box-shadow: inset 100vw 0 #043354;
+    color: white;
+}
+
+#personal-data dd {
+    margin-left: 0;
+    padding: 5px 0 5px 40px;
+    border-right: 2px solid #043354;
+}
+
+
+#personal-data dd:last-child {
+    border-bottom: 2px solid #043354;
+}
+
+#club-history h2 {
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+#club-history dl {
+    margin-top: 0;
+    border: 2px solid #043354;
+    padding: 15px;
+    columns: 2;
+}
+
+#club-history dt {
+    color: #043354;
+    font-weight: 600;
+    padding: 5px 0;
+    break-after: avoid-column;
+}
+
+#club-history dt:not(:first-child) {
+    margin-top: 10px;
+}
+
+#club-history dd {
+    text-transform: capitalize;
+}
