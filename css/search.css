@@ -45,8 +45,8 @@ div.loading {
     top: calc(50% - 75px);
     left: calc(50% - 75px);
     margin: 0 auto;
-    border: 1em solid #8BB2CF; /* Light grey */
-    border-top: 1em solid #1E6CAF; /* Blue */
+    border: 1em solid #8BB2CF;
+    border-top: 1em solid #1E6CAF;
     border-radius: 50%;
     width: 150px;
     height: 150px;
