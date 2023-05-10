@@ -10,12 +10,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 const fetchPlayers = async (name) => {
+  if(!name) {
+    return [];
+  }
+
   const lastTS = parseInt(localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}-TS`), 10);
   const currentTS = new Date().getTime();
 
-  if(!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 1000)) {
+  if (!isNaN(lastTS) && currentTS - lastTS < (24 * 60 * 60 * 1000)) {
     const searchCache = localStorage.getItem(`MY-SEARCH-${name.toLowerCase()}`);
-    if(searchCache) {
+    if (searchCache) {
       return JSON.parse(searchCache);
     }
   }
@@ -23,6 +27,7 @@ const fetchPlayers = async (name) => {
   const allPlayers = [];
   let currentPage = 1;
   let playersTotal;
+
 
   while (playersTotal === undefined || allPlayers.length < playersTotal) {
     const response = await fetch(
@@ -46,6 +51,11 @@ const fetchPlayers = async (name) => {
     );
 
     const data = await response.json();
+
+    if (data.Error) {
+      return [];
+    }
+
     allPlayers.push(...data.Result);
     playersTotal = data.Total;
     currentPage++;
@@ -58,9 +68,19 @@ const fetchPlayers = async (name) => {
 };
 
 const loadPlayerList = (players) => {
+
+  if (players.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "Não foram encontrados jogadores com esse nome";
+    document.querySelector("div.loading").remove()
+    document.getElementById("new-cv")?.removeAttribute("disabled");
+    document.getElementById("player-list").append(p);
+    return;
+  }
+
   const items = players.map((p, i) => {
     const li = document.createElement("li");
-    
+
     const radio = document.createElement("input");
     radio.setAttribute("id", `player-pick-${i}`);
     radio.setAttribute("type", "radio");
@@ -71,7 +91,7 @@ const loadPlayerList = (players) => {
     const label = document.createElement("label");
     label.setAttribute("for", `player-pick-${i}`);
     label.textContent = `${p.ShortDescription} (${p.ClubName}) [${p.FootballType}]`;
-    
+
     li.append(radio, label);
     return li;
   });
